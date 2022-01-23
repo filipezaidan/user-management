@@ -1,7 +1,7 @@
 //Libraries
 import {  useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import { AuthContext} from '../../contexts/auth'; 
+import { AuthContext} from '../../contexts/auth'; 
 
 //Assets
 // import logo from '../../assets/logo.png'
@@ -14,12 +14,12 @@ export default function SignUp(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // const { signUp, loadingAuth} = useContext(AuthContext);
+    const { signUp, loadingAuth} = useContext(AuthContext);
 
     function handleSubmit(e){
         e.preventDefault();
         if(name !== '' && email !== '' && password !== ''){
-            // signUp(email, password, name);
+            signUp(email, password, name);
         }
     }
 
@@ -35,7 +35,7 @@ export default function SignUp(){
                     <input type="text" placeholder="Nome completo"  value={name} onChange={(e) => setName(e.target.value)} required/>
                     <input type="text" placeholder="email@email.com"  value={email} onChange={(e) => setEmail(e.target.value)} required/>
                     <input type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    {/* <button type="submit">{loadingAuth ? 'Carregando' : 'Cadastrar'}</button> */}
+                    <button type="submit">{loadingAuth ? 'Carregando' : 'Cadastrar'}</button>
                 </form>
 
                 <Link to="/signin">Fazer Login</Link>

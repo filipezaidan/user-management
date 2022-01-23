@@ -19,15 +19,15 @@ export default function SignIn(){
 
     // const { signIn, loadingAuth} = useContext(AuthContext);
 
-    // function handleSubmit(e){
-    //     e.preventDefault();
-    //     if(email !== '' &&  password !== ''){
-    //         signIn(email, password)
+    function handleSubmit(e){
+        e.preventDefault();
+        if(email !== '' &&  password !== ''){
+            // signIn(email, password)
             
-    //     }else{
-    //         console.log('preencha todos os campos solicitados')
-    //     }
-    // }
+        }else{
+            console.log('preencha todos os campos solicitados')
+        }
+    }
 
     return(
         <div className="container-center">
@@ -36,7 +36,7 @@ export default function SignIn(){
                     {/* <img src={logo} alt="Logo do sistema"/> */}
                 </div>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <h1>Entrar</h1>
                     <input type="text" placeholder="email@email.com"  value={email} onChange={(e) => setEmail(e.target.value)} required/>
                     <input type="password" placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} required />
