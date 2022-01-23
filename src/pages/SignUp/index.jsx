@@ -1,5 +1,5 @@
 //Libraries
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth';
 //Assets
@@ -9,18 +9,20 @@ import { AuthContext } from '../../contexts/auth';
 import './signup.css'
 
 export default function SignUp() {
-    // let navigate =  useNavigate()
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { signUp, loadingAuth } = useContext(AuthContext);
+    const { signUp, loadingAuth, signed } = useContext(AuthContext);
+
+    useEffect(() => {
+        
+    },[signed])
 
     function handleSubmit(e) {
         e.preventDefault();
         if (name !== '' && email !== '' && password !== '') {
             signUp(email, password, name);    
-            <Navigate to="/home"/>       
         }
     }
 
