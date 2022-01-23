@@ -1,15 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 
 //Pages
-import Home from '../pages/Home/index';
+import Home from '../pages/Home';
+import Login from '../pages/Login';
 import SignIn from '../pages/SignIn';
 
 
 function RoutesWrapper() {
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signin" element={<SignIn />} />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signin" element={<SignIn />} />
         </Routes>
     );
 }
