@@ -9,12 +9,12 @@ import Routes from './routes'
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
-  return(
-    <AuthProvider>
-      <BrowserRouter>
+  return (
+    <BrowserRouter>
+      <AuthProvider>
         <ToastContainer autoClose={3000} />
-        <Routes/>
-      </BrowserRouter>
-    </AuthProvider>
+        <Routes />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }

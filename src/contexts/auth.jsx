@@ -1,12 +1,15 @@
 //Libraries
 import { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import api from '../services/api';
+import { useHistory } from "react-router-dom";
 
 //Const
 export const AuthContext = createContext({});
 
 export default function AuthProvider({ children }) {
+    let navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [loadingAuth, setLoadingAuth] = useState(false);
@@ -18,6 +21,7 @@ export default function AuthProvider({ children }) {
             if (storageUser) {
                 setUser(JSON.parse(storageUser));
                 setLoading(false);
+                navigate('/home')
             }
             setLoading(false);
         }
@@ -34,22 +38,21 @@ export default function AuthProvider({ children }) {
             nome
         }
         await toast.promise(
-
             api.post('/', data)
                 .then((res) => {
                     console.log(res)
                     setUser(data);
                     storageUser(data);
                     setLoadingAuth(false);
-                    // toast.success('Seja bem vindo!');
-                }).catch((err) => console.log(res)),
+                    navigate('/home')
+                }).catch((err) => console.log(err)),
             {
                 pending: 'Enviando dados...',
                 success: 'Conta cadastrada com sucesso!',
                 error: 'Ocorreu algum erro, tente novamente!'
-
             }
-        )
+        );
+        
     }
 
     function storageUser(data) {
