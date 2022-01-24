@@ -22,10 +22,6 @@ export default function Header() {
                 <FiHome size={24} color="#fff" />
                 Inicio
             </Link>
-            <Link to='/'>
-                <FiUser size={24} color="#fff"/>
-                Clientes
-            </Link>
             <Link to='/' onClick={signOut}>
                 <FiLogOut size={24} color="#fff"/>
                 Sair

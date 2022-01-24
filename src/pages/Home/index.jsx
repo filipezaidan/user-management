@@ -1,9 +1,8 @@
 //Libraries
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FiMessageSquare, FiPlus, FiSearch, FiEdit2, FiTrash } from 'react-icons/fi';
-
-
-
+//Contexts
+import { AuthContext } from '../../contexts/auth';
 //Components
 import Header from '../../components/Header';
 import Title from '../../components/Title';
@@ -13,9 +12,11 @@ import { Link } from "react-router-dom";
 //Styles
 import './home.css'
 import api from "../../services/api";
+import { toast } from "react-toastify";
 
 
 export default function Home() {
+    const { user } = useContext(AuthContext);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showPostModal, setShowPostModal] = useState(false);
@@ -27,12 +28,25 @@ export default function Home() {
 
     }
 
-    async function handleDeleteCall(doc) {
-        console.log(doc)
+    async function handleDeleteUser(id) {
+        api.delete(`/${id}`, { 
+            headers: { 'Authorization': user.id },
+            validateStatus: () => true 
+        })
+        .then(res => {
+            if(res.status === 200){
+                toast.success("Usuario deletado com sucesso!")
+                getUsers();
+            }else{
+                toast.error("Error ao deletar o usuário!")
+            }
+        })
+            .catch(err => console.log(err))
     }
 
     const getUsers = async () => {
-        api.get("/", { headers: { 'Authorization': 1 } }).then(res => setUsers(res.data))
+        console.log('getusers:', user.id)
+        api.get("/", { headers: { 'Authorization': user.id } }).then(res => setUsers(res.data))
             .catch(err => console.log(err))
     }
 
@@ -73,7 +87,7 @@ export default function Home() {
                                                 <Link className='action' style={{ backgroundColor: '#f6a935' }} to={`/new/${item.id}`}>
                                                     <FiEdit2 color='#FFF' size={17} />
                                                 </Link>
-                                                <button className='action' style={{ backgroundColor: 'red' }} onClick={() => handleDeleteCall(item)}>
+                                                <button className='action' style={{ backgroundColor: 'red' }} onClick={() => handleDeleteUser(item.id)}>
                                                     <FiTrash color='#FFF' size={17} />
                                                 </button>
                                             </td>

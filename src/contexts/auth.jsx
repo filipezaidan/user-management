@@ -3,7 +3,6 @@ import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import api from '../services/api';
-import { useHistory } from "react-router-dom";
 
 //Const
 export const AuthContext = createContext({});
@@ -69,9 +68,9 @@ export default function AuthProvider({ children }) {
         api.post('/login', data, {validateStatus: () => true})
             .then((res) => {
                 if(res.status === 200){
-                    console.log(res)
-                    setUser(data);
-                    storageUser(data);
+                    console.log(res.data)
+                    setUser(res.data);
+                    storageUser(res.data);
                     setLoadingAuth(false);
                     navigate('/home')
                 }else{
