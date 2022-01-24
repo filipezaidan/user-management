@@ -26,11 +26,6 @@ export default function Header() {
                 <FiUser size={24} color="#fff"/>
                 Clientes
             </Link>
-            <Link to='/'>
-                <FiSettings size={24} color="#fff"/>
-                Configurações
-            </Link>
-            
             <Link to='/' onClick={signOut}>
                 <FiLogOut size={24} color="#fff"/>
                 Sair

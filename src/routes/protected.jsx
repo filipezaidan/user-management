@@ -6,7 +6,6 @@ import {useContext} from 'react';
 
 const ProtectedRoutes = () => {
     const { signed } = useContext(AuthContext);
-    console.log('signed', signed)
     return signed ? <Outlet/> : <Navigate to='/' />
 }
 

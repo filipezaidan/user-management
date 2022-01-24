@@ -30,15 +30,15 @@ export default function AuthProvider({ children }) {
     }, [])
 
     // Create a user 
-    async function signUp(email, password, nome) {
+    async function signUp(email, password, name) {
         setLoadingAuth(true);
         let data = {
             email,
             password,
-            nome
+            name
         }
         await toast.promise(
-            api.post('/', data)
+            api.post('/register', data)
                 .then((res) => {
                     console.log(res)
                     setUser(data);
@@ -52,7 +52,6 @@ export default function AuthProvider({ children }) {
                 error: 'Ocorreu algum erro, tente novamente!'
             }
         );
-        
     }
 
     function storageUser(data) {
@@ -61,6 +60,25 @@ export default function AuthProvider({ children }) {
 
     async function signIn(email, password) {
         setLoadingAuth(true)
+        let data = {
+            email,
+            password
+        }
+
+
+        api.post('/login', data, {validateStatus: () => true})
+            .then((res) => {
+                if(res.status === 200){
+                    console.log(res)
+                    setUser(data);
+                    storageUser(data);
+                    setLoadingAuth(false);
+                    navigate('/home')
+                }else{
+                    toast.error("Email/Senha incorretos!")
+                }
+            })
+            .catch((err) => console.log(err))
     }
 
     // Logout account

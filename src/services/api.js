@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-
 const api = axios.create({
-    baseURL: 'https://pweb2-ifal.herokuapp.com/',
+    baseURL: 'https://api-pweb2.herokuapp.com',
 });
 
 export default api;
