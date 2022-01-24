@@ -6,6 +6,7 @@ import ProtectedRoutes from './protected';
 import { AuthContext } from '../contexts/auth';
 //Pages
 import Home from '../pages/Home';
+import Edit from '../pages/Edit';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 
@@ -17,6 +18,7 @@ function RoutesWrapper() {
             <Route exact path="/register" element={<SignUp />} />
             <Route element={<ProtectedRoutes />}>
                 <Route exact path="/home" element={<Home />} />
+                <Route exact path="/edit/:id" element={<Edit />} />
             </Route>
             <Route exact path="/login" element={<SignIn />} />
         </Routes>

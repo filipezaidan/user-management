@@ -64,8 +64,8 @@ export default function Home() {
                 </Title>
 
                 {users.length === 0 ?
-                    <div className="container home">
-                        <span>Nenhum usuario registrado...</span>
+                    <div className="home">
+                        <span>Carregando usuários...</span>
                     </div>
                     :
                     <>
@@ -84,7 +84,7 @@ export default function Home() {
                                             <td data-label="Nome">{item.name}</td>
                                             <td data-label="Email">{item.email}</td>
                                             <td data-label="#">
-                                                <Link className='action' style={{ backgroundColor: '#f6a935' }} to={`/new/${item.id}`}>
+                                                <Link className='action' style={{ backgroundColor: '#f6a935' }} to={`/edit/${item.id}`}>
                                                     <FiEdit2 color='#FFF' size={17} />
                                                 </Link>
                                                 <button className='action' style={{ backgroundColor: 'red' }} onClick={() => handleDeleteUser(item.id)}>

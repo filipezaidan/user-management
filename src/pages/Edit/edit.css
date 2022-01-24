@@ -1,0 +1,41 @@
+.form-edit{
+    width: 100%;
+    background: #d9d9d9;
+    display: flex;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
+
+    
+}
+
+.form-edit label{
+    font-size: 18px;
+    color: #000;
+    font-weight: 500;
+    margin-top: 10px;
+}
+.form-edit input{
+    margin-bottom: 1em;
+    height: 35px;
+    border: 0;
+    border-radius: 7px;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #fff;
+}
+
+.form-edit form button {
+    margin-bottom: 1em;
+    height: 35px;
+    border: 0;
+    border-radius: 7px;
+    background-color: #181c3e;
+    color: #fff;
+    font-size: 1.3em;
+}
+
+.form-edit form button:hover {
+    transition: 2ms;
+    background-color: #2a2f63;
+}
