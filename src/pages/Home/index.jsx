@@ -45,14 +45,14 @@ export default function Home() {
     }
 
     const getUsers = async () => {
-        console.log('getusers:', user.id)
         api.get("/", { headers: { 'Authorization': user.id } }).then(res => setUsers(res.data))
             .catch(err => console.log(err))
     }
 
     useEffect(() => {
+        console.log(user)
         getUsers();
-    }, [])
+    }, [user])
 
     return (
         <div>

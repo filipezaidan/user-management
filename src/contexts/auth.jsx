@@ -40,8 +40,8 @@ export default function AuthProvider({ children }) {
             api.post('/register', data)
                 .then((res) => {
                     console.log(res)
-                    setUser(data);
-                    storageUser(data);
+                    setUser(res.data);
+                    storageUser(res.data);
                     setLoadingAuth(false);
                     navigate('/home')
                 }).catch((err) => console.log(err)),

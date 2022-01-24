@@ -1,6 +1,7 @@
 //Libraries
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 //Contexts
 import { AuthContext } from '../../contexts/auth';
 //Services
@@ -11,11 +12,9 @@ import Title from '../../components/Title';
 //Stlyes
 import './edit.css';
 
-
-
 export default function New() {
+    const navigate = useNavigate()
     const { id } = useParams();
-
     const { user } = useContext(AuthContext)
 
     const [name, setName] = useState('');
@@ -25,10 +24,29 @@ export default function New() {
     const getUserById = async () => {
         api.get(`/${id}`, { headers: { 'Authorization': user.id } })
             .then(res => {
-                const {data} = res;
+                const { data } = res;
                 setName(data.name)
                 setEmail(data.email)
                 setPassword(data.password)
+            })
+            .catch(err => console.log(err))
+    }
+    const updateUser = async (e) => {
+        e.preventDefault()
+
+        let data = {
+            name,
+            email,
+            password
+        }
+        api.put(`/${id}`, data, { headers: { 'Authorization': user.id } })
+            .then(res => {
+                if (res.status === 200) {
+                    toast.success("Usuario editado com sucesso!")
+                    navigate('/home')
+                } else {
+                    toast.error("Erro ao editar o usuário")
+                }
             })
             .catch(err => console.log(err))
     }
@@ -44,7 +62,7 @@ export default function New() {
             <div className="content">
                 <Title name='Editar Usuário' />
                 <div className="form-edit">
-                    <form className="form-profile" onSubmit={() => console.log('teste')}>
+                    <form className="form-profile" onSubmit={(e) => updateUser(e)}>
 
                         <label>Nome</label>
                         <input
